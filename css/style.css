@@ -1,0 +1,213 @@
+/* Fond global de la page */
+
+/*
+  Méthode recommandée pour flouter l'image de fond sans toucher au HTML :
+  - on place l'image dans un pseudo-élément fixe `body::before`,
+  - on applique `filter: blur()` sur ce pseudo-élément.
+  Avantage : l'image est floutée mais le contenu HTML reste net.
+*/
+body {
+  /* couleur de secours si l'image ne se charge pas */
+  background-color: rgb(220, 220, 164);
+  /* garantir la hauteur minimale */
+  min-height: 100vh;
+  position: relative; /* pour contexte de stacking si nécessaire */
+  z-index: 0;
+}
+
+/* Pseudo-élément fixe contenant l'image de fond floutée */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background-image: url("../image/arplan.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* ajustez ici l'intensité du flou (px) */
+  filter: blur(8px);
+  /* on scale légèrement pour éviter les bordures visibles après le flou */
+  transform: scale(1.05);
+  z-index: -1; /* place le calque derrière le contenu */
+  pointer-events: none; /* permet de cliquer sur les éléments au-dessus */
+}
+
+/* Variante pour un bloc (ex: hero) où l'on veut une image de fond floue localement */
+.bg-hero {
+  position: relative; /* nécessaire pour que ::before s'aligne sur le bloc */
+  overflow: hidden; /* évite que le ::before dépasse */
+  width: 100%;
+  height: 60vh; /* ajustez selon besoin */
+}
+.bg-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../image/arplan.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(6px);
+  transform: scale(1.03);
+  z-index: -1;
+  pointer-events: none;
+}
+
+ /* Mobile / performance : réduire ou désactiver le flou sur petits écrans
+   car le filtre est coûteux sur certains appareils.  Demander aux prof plus d'éclairessisment sur ce bout de CSS */
+@media (max-width: 600px) {
+  body::before,
+  .bg-hero::before {
+    filter: blur(30%);
+    transform: none;
+  }
+}
+
+/* Alternative (backdrop-filter) :
+   - utile pour flouter le contenu derrière un overlay translucide.
+   - nécessite un overlay HTML ou une couleur semi-transparente et
+     a un support moindre sur d'anciens navigateurs.
+   Exemple :
+     .overlay { background: rgba(255,255,255,0.2); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+*/
+
+header nav a {
+  color: #ff8c42;
+  /* couleur des liens dans le header (orange doux) */
+
+  text-decoration: solid;
+
+  /* suppression du soulignement */
+
+  font-weight: bold;
+
+  /* texte en gras pour les liens */
+ /* display: flexbox;
+  gap: calc(0.5rem);
+  align-items: right; */
+
+}
+nav {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  margin-top: 20px;
+  margin-right: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+nav a:hover {
+  background: #e84f4f;
+  border: #e2bea7 2px solid;
+  border-radius: 12%;
+  box-shadow: #444 2px 2px 6px;
+  
+
+}
+.encadre-simple img {
+  border: 4px solid #333;
+  border-radius: 25%;
+  padding: 4px;
+  background: #d43f3f;
+}
+.photo figcaption {
+  font-size: 0.85rem;
+  color: #444;
+  margin-top: 0.4rem;
+}
+img {
+  max-width: 18%;
+  height: auto;
+  margin: 10px ;
+  float: left;
+  cursor: pointer;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Classe utilitaire pour déclencher l'animation sur un élément */
+.animate-fadeUp {
+  animation: fadeUp 600ms ease-out forwards;
+}
+
+/* Stagger : applique l'animation aux enfants (utile pour listes) */
+.stagger li {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.stagger li:nth-child(1){ animation: fadeUp 480ms ease-out forwards 80ms; }
+.stagger li:nth-child(2){ animation: fadeUp 480ms ease-out forwards 160ms; }
+.stagger li:nth-child(3){ animation: fadeUp 480ms ease-out forwards 240ms; }
+.stagger li:nth-child(4){ animation: fadeUp 480ms ease-out forwards 320ms; }
+.stagger li:nth-child(5){ animation: fadeUp 480ms ease-out forwards 400ms; }
+.stagger li:nth-child(6){ animation: fadeUp 480ms ease-out forwards 480ms; }
+
+/* Respecter la préférence 'réduire les animations' */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeUp,
+  .stagger li,
+  .btn {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 800ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { animation: none !important; }
+}
+@keyframes colorCycle {
+  0%   { background-color: #ff7a7a; }
+  33%  { background-color: #ffd37a; }
+  66%  { background-color: #7af0ff; }
+  100% { background-color: #ff7a7a; }
+}
+
+.box-cycle {
+  width: 240px;
+  height: 120px;
+  padding: auto;
+  animation: colorCycle 12s linear infinite;
+}
+
+/* ---------- Menu toggle / show-hide ---------- */
+.menu-toggle {
+  display: inline-block;
+  background: #ff8c42;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.main-nav {
+  overflow: hidden;
+  max-height: 0; /* collapsed */
+  opacity: 0;
+  transition: max-height 320ms ease, opacity 240ms ease;
+}
+.main-nav.open {
+  max-height: 600px; /* large enough to contain the menu */
+  opacity: 1;
+}
+
+/* Desktop : afficher le menu toujours visible */
+@media (min-width: 700px) {
+  .menu-toggle { display: none; }
+  .main-nav { max-height: none; opacity: 1; overflow: visible; }
+}
+
+/* petites améliorations d'accessibilité/visibilité */
+.main-nav ul { list-style: none; margin: 0; padding: 0.6rem 0; }
+.main-nav li { margin: 0.2rem 0; }
+.main-nav a { display: inline-block; padding: 0.4rem 0.6rem; border-radius: 4px; }
