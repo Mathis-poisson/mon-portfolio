@@ -20,7 +20,9 @@ body::before {
   content: "";
   position: fixed;
   inset: 0; /* top:0; right:0; bottom:0; left:0; */
-  background-image: url("../image/arplan.jpg");
+  background-image: none;/*pour rajouter une image de fond*/
+  
+  
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -47,7 +49,7 @@ body::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(6px);
+  filter: blur(500px);
   transform: scale(1.03);
   z-index: -1;
   pointer-events: none;
@@ -72,7 +74,7 @@ body::before {
 */
 
 header nav a {
-  color: #ff8c42;
+  color: #000000;
   /* couleur des liens dans le header (orange doux) */
 
   text-decoration: solid;
@@ -96,8 +98,10 @@ nav {
   animation: fadeIn 2s ease-in-out;
 }
 nav a:hover {
-  background: #e84f4f;
-  border: #e2bea7 2px solid;
+  background: #acddf2 ;
+  padding: 2px;
+  
+  border: #4f4e4c 3px solid;
   border-radius: 12%;
   box-shadow: #444 2px 2px 6px;
   
@@ -107,7 +111,7 @@ nav a:hover {
   border: 4px solid #333;
   border-radius: 25%;
   padding: 4px;
-  background: #d43f3f;
+  background: #edf3f1;
 }
 .photo figcaption {
   font-size: 0.85rem;
@@ -181,7 +185,7 @@ img {
 /* ---------- Menu toggle / show-hide ---------- */
 .menu-toggle {
   display: inline-block;
-  background: #ff8c42;
+  background: #352115;
   color: #fff;
   border: none;
   padding: 0.4rem 0.8rem;
@@ -211,3 +215,29 @@ img {
 .main-nav ul { list-style: none; margin: 0; padding: 0.6rem 0; }
 .main-nav li { margin: 0.2rem 0; }
 .main-nav a { display: inline-block; padding: 0.4rem 0.6rem; border-radius: 4px; }
+
+/* Styles locaux pour les exemples */
+.hero-link {
+display:block;
+height:220px;
+margin:0.6rem 0 1.2rem 0;
+background-image: url('image/arplan.jpg');
+background-size: cover;
+background-position: center;
+border-radius:10px;
+box-shadow: 0 6px 18px rgba(33, 33, 33, 0.18);
+text-decoration: none;
+        }
+.card {
+display:inline-flex;
+align-items:center;
+gap:0.6rem;
+padding:0.6rem 0.8rem;
+border-radius:8px;
+border:4px solid #b4b3b3;
+text-decoration:none;
+color:inherit;
+background:#464444;
+box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+.card:hover { transform: translateY(-4px); transition: transform 180ms ease; }
