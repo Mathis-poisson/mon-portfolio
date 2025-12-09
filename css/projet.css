@@ -1,0 +1,92 @@
+/* projet.css — fichier réorganisé
+	 Sections : variables, composants (reveal), utilitaires
+	 Nettoyé des valeurs invalides et commentaires ajoutés.
+*/
+
+/* ----- Variables / configuration ----- */
+:root {
+	--transition-fast: 200ms;
+	--transition-medium: 300ms;
+	--reveal-max-height: 400px;
+	--reveal-width: 220px;
+	--focus-ring: rgba(0,123,255,0.25);
+}
+
+/* Respecter préférence utilisateur pour réduire les animations */
+@media (prefers-reduced-motion: reduce) {
+	:root { --transition-fast: 0ms; --transition-medium: 0ms; }
+}
+
+/* ----- Reveal (toggle) component used in teste.html ----- */
+.reveal-text-teste {
+	overflow: hidden;
+	max-height: 0;
+	opacity: 0; /* use 0..1 for opacity */
+	transition: max-height var(--transition-medium) ease, opacity var(--transition-fast) ease;
+	margin-top: 0.6rem;
+	max-width: var(--reveal-width);
+}
+.reveal-text-teste.show {
+	max-height: var(--reveal-max-height);
+	opacity: 1;
+}
+
+.img-toggle-teste { display: block; }
+.img-toggle-teste:focus { outline: 3px solid var(--focus-ring); outline-offset: 4px; }
+
+/* ----- details / reveal native element helpers ----- */
+.reveal .content {
+	opacity: 0;
+	max-height: 0;
+	overflow: hidden;
+	transition: opacity .3s ease, max-height .35s ease;
+}
+.reveal[open] .content { opacity: 1; max-height: 600px; }
+
+/* If you have a structure like <details class="reveal"><summary><img></summary>
+	 style the image inside the summary like this: */
+.reveal summary img { max-width: var(--reveal-width); border-radius: 30px; display: block; }
+
+/* ----- Projets grid layout ----- */
+.projets {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 2rem;
+	margin: 2rem 0;
+}
+
+.project-card {
+	border: 1px solid #a4e987;
+	border-radius: 12px;
+	padding: 1rem;
+	background: #fafafa;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+	transition: box-shadow 250ms ease, transform 200ms ease;
+}
+
+.project-card:hover {
+	box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+	transform: translateY(-4px);
+}
+
+.project-card summary {
+	cursor: pointer;
+	list-style: none;
+}
+
+.project-card summary img {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+	display: block;
+	transition: transform 200ms ease;
+}
+
+.project-card summary:hover img {
+	transform: scale(1.05);
+}
+
+/* ----- Utilities / helpers ----- */
+.hidden { display: none !important; }
+
+/* End of projet.css */
