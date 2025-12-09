@@ -1,2 +1,47 @@
-body{background-color: rgb(255, 255, 255);
-background-image: none;}
+/* css/index.css
+	 Fichier de surcharge pour corriger les styles de liens.
+	 (Chargé après style.css dans index.html, il prend la priorité.)
+*/
+:root {
+	--link-color: #100f0f;
+	--link-hover-bg: #f77c7c;
+}
+
+/* règles génériques pour tous les liens */
+a {
+	color: var(--link-color);
+	text-decoration: none; /* supprimer le soulignement par défaut */
+}
+
+a:focus {
+	outline: 3px solid rgba(218, 215, 213, 0.25);
+	outline-offset: 2px;
+}
+
+/* liens dans le header / nav */
+header nav a,
+nav a,
+.main-nav a {
+	color: var(--link-color);
+	text-decoration: none; /* corrige les valeurs invalides dans style.css */
+	font-weight: 700;
+	padding: 0.25rem 0.5rem;
+	border-radius: 6px;
+	transition: background 180ms ease, color 180ms ease, transform 120ms ease;
+}
+
+header nav a:hover,
+nav a:hover,
+.main-nav a:hover {
+	background: var(--link-hover-bg);
+	color: #fff;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* cas spécial : liens sur images (retirer bordures indésirables) */
+a img { border: none; }
+
+/* utile en développement pour voir que le fichier est chargé */
+/* body::after { content: "index.css chargé"; position: fixed; right: 8px; bottom: 8px; background:#000;color:#fff;padding:2px 6px;font-size:10px;opacity:0.6;border-radius:4px;} */
+
