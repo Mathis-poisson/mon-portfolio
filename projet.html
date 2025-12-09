@@ -1,37 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Projets — Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/projet.css">
 </head>
-<link rel="stylesheet" href="css/style.css">
 <body>
+    <!-- Header / Navigation -->
     <header class="site-header" role="banner">
-        <nav role="navigation" aria-label="Accueil">
+        <nav role="navigation" aria-label="projets">
             <ul>
                 <li><a href="index.html">Accueil</a></li>
-                <li><a href="projet.html">projet</a></li>
-                <li><a href="à propos.html">à propos</a></li>
+                <li><a href="projet.html" aria-current="page">Projets</a></li>
+                <li><a href="à propos.html">À propos</a></li>
             </ul>
         </nav>
-
     </header>
-    <section class="site-content" role="">
-        
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, excepturi, quia omnis ipsa iste deleniti molestiae sunt blanditiis quibusdam necessitatibus, deserunt repellendus reprehenderit. Nam, labore? Saepe doloremque veniam numquam eum?
-        </p>
-        <p>« Moussa Mathis, l'homme qui souhaite le pire à son prochain et le meilleur à lui-même » — par Ymamou Younais (BUT1 informatique)</p>
 
-    </section>
-    sec
-     <section>
-          <h2>course de pneu</h2>
-            <!-- Lien utilisé comme bloc avec image de fond -->
-            <a href="projet.html" class="hero-link" aria-label="Voir mes projets" style="background-image:url('image/coursepneu.jpg')"></a>
-            <h2>coraux de mayotte</h2>
-            <a href="projet.html" class="hero-link" aria-label="Voir mes projets" style="background-image:url('image/coraux\ mayotte.jpg')"></a>
+    <!-- Main Content -->
+    <main class="site-content" role="main">
+        <h1>Mes projets</h1>
+
+        <section class="intro">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, excepturi, quia omnis ipsa iste deleniti molestiae sunt blanditiis quibusdam necessitatibus, deserunt repellendus reprehenderit. Nam, labore? Saepe doloremque veniam numquam eum?</p>
+            <p>« Moussa Mathis, l'homme qui souhaite le pire à son prochain et le meilleur à lui-même » — par Ymamou Younais (BUT1 informatique)</p>
         </section>
-    
+
+        <!-- Projets (avec details / reveal) -->
+        <section class="projets">
+            <!-- Projet 1 : Coraux de Mayotte -->
+            <details class="reveal project-card">
+                <summary style="border:0; background:none; padding:0; cursor:pointer;">
+                    <img src="image/coraux mayotte.jpg" alt="Coraux de Mayotte — Cliquez pour en savoir plus" style="max-width:220px; border-radius:8px; display:block;">
+                </summary>
+                <div class="content">
+                    <h2>Coraux de Mayotte</h2>
+                    <p>Texte qui apparaît — description, liens, etc.</p>
+                </div>
+            </details>
+
+            <!-- Projet 2 : Course de Pneu -->
+            <details class="reveal project-card">
+                <summary style="border:0; background:none; padding:0; cursor:pointer;">
+                    <img src="image/coursepneu.jpg" alt="Course de pneus — Cliquez pour en savoir plus" style="max-width:220px; border-radius:8px; display:block;">
+                </summary>
+                <div class="content">
+                    <h2>Course de pneus</h2>
+                    <p>La course de pneus est une course à pied particulière qui a lieu chaque année dans le département français de Mayotte, à Mamoudzou, depuis les années 80. Jusqu'à 900 participants parcourent les rues de la ville sur une distance de 1 800 mètres en poussant chacun avec deux bâtons un pneu maintenu en équilibre par sa rotation. Il s'agit de l'événement sportif le plus important du département, hors football.</p>
+                </div>
+            </details>
+        </section>
+    </main>
+<section id="footer"> 
+    <!-- Footer (optionnel) -->
+    <footer class="site-footer">
+        <p>&copy; 2025 Mon Portfolio. Tous droits réservés.</p>
+    </footer>
+</section>
 </body>
 </html>
