@@ -44,7 +44,7 @@ body::before {
   height: 60vh; /* ajustez selon besoin */
 }
 /* Headings : enlever marge haute par défaut */
-h1, h2 {
+h1, h2 {margin-right:center;
   margin-top: 0;
   margin-bottom: 0.5rem;
   scroll-margin-top: 1rem;
@@ -188,18 +188,6 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .fade-in { animation: none !important; }
 }
-@keyframes colorCycle {
-  0%   { background-color: #ff7a7a; }
-  33%  { background-color: #ffd37a; }
-  66%  { background-color: #7af0ff; }
-  100% { background-color: #ff7a7a; }
-}
-
-.box-cycle {
-  width: 240px;
-  height: 120px;
-  animation: colorCycle 12s linear infinite;
-}
 
 /* ---------- Menu toggle / show-hide ---------- */
 .menu-toggle {
@@ -248,28 +236,151 @@ img {
   text-decoration: none;
 }
 
+/* ----- Cards container (grille responsive) ----- */
+section:has(.card) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+}
+/* --- Card en colone pour mobile --- */body::before {
+  content: "";
+  position: fixed;          /* Reste fixe quand on scroll */
+  inset: 0;                 /* Remplit tout l'écran */
+  background-image: url(...);
+  filter: blur(8px);        /* Flou de 8 pixels */
+  z-index: -1;              /* Derrière le contenu */
+  pointer-events: none;     /* Permet de cliquer au-dessus */
+}body::before {
+  content: "";
+  position: fixed;          /* Reste fixe quand on scroll */
+  inset: 0;                 /* Remplit tout l'écran */
+  background-image: url(...);
+  filter: blur(8px);        /* Flou de 8 pixels */
+  z-index: -1;              /* Derrière le contenu */
+  pointer-events: none;     /* Permet de cliquer au-dessus */
+}
+@media (max-width: 768px) {
+  section:has(.card) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 .card {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 0.8rem;
+  flex-direction: column;
+  text-align: center;
+  gap: 0.8rem;
+  padding: 1rem;
   border-radius: 8px;
   border: 4px solid #b4b3b3;
   text-decoration: none;
   color: inherit;
   background: #464444;
   box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  transition: all 200ms ease;
 }
-.card:hover { transform: translateY(-4px); transition: transform 180ms ease; }
+.card:hover { 
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-content {
+  display: block;
+  font-weight: 500;
+}
 
 footer {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #7ea5ea;
   font-size: 0.9rem;
-  color: #666;
+  color: #fda3a3;
   text-align: center;
   /* Dégradé statique : fondu de couleur sans animation */
   /* Ajustez les couleurs ci-dessous selon votre design */
-  background: linear-gradient(to top, rgba(188, 234, 89, 0.06) 0%, rgba(241, 90, 90, 0) 100%);
+  background: linear-gradient(to top, rgba(90, 63, 1, 0.06) 20%, rgba(239, 6, 6, 0) 100%);
 }
+@media (prefers-reduced-motion: reduce) {
+	:root { --transition-fast: 0ms; --transition-medium: 0ms; }
+}
+
+/* ----- Reveal (toggle) component used in teste.html ----- */
+.reveal-text-teste {
+	overflow: hidden;
+	max-height: 0;
+	opacity: 0; /* use 0..1 for opacity */
+	transition: max-height var(--transition-medium) ease, opacity var(--transition-fast) ease;
+	margin-top: 0.6rem;
+	max-width: var(--reveal-width);
+}
+.reveal-text-teste.show {
+	flex: auto;
+	max-height: var(--reveal-max-height);
+	opacity: 1;
+}
+
+.img-toggle-teste { display: block; }
+.img-toggle-teste:focus { outline: 3px solid var(--focus-ring); outline-offset: 4px; }
+
+/* ----- details / reveal native element helpers ----- */
+.reveal .content {
+	flex: auto;
+	opacity: 0;
+	max-height: 0;
+	overflow: hidden;
+	transition: opacity .3s ease, max-height .35s ease;
+}
+.reveal[open] .content { opacity: 1; max-height: 600px; }
+
+/* If you have a structure like <details class="reveal"><summary><img></summary>
+	 style the image inside the summary like this: */
+.reveal summary img { max-width: var(--reveal-width); border-radius: 30px; display: block; }
+
+/* ----- Projets grid layout ----- */
+.projets {
+	flex: auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 2rem;
+	margin: 2rem 0;
+}
+
+.project-card {flex: auto;
+	border: 1px solid #a4e987;
+	border-radius: 12px;
+	padding: 1rem;
+	background: #fafafa;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+	transition: box-shadow 250ms ease, transform 200ms ease;
+}
+
+.project-card:hover {
+	box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+	transform: translateY(-4px);
+}
+
+.project-card summary {
+	cursor: pointer;
+	list-style: none;
+}
+
+.project-card summary img {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+	display: block;
+	transition: transform 200ms ease;
+}
+
+.project-card summary:hover img {
+	flex: auto;
+	transform: scale(1.05);
+}
+
+/* ----- Utilities / helpers ----- */
+.hidden { display: none !important; }
+
