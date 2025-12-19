@@ -59,6 +59,14 @@
 	margin: 2rem 0;
 }
 
+/* Mobile : 1 colonne seulement */
+@media (max-width: 768px) {
+	.projets {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+}
+
 .project-card {
 	flex: auto;
 	border: 1px solid #a4e987;
