@@ -116,6 +116,10 @@ nav {
   margin-top: 20px;
   margin-right: 20px;
   animation: fadeIn 2s ease-in-out;
+  background-color: #3d9bac;
+border-radius: 20px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+background-image: linear-gradient(135deg, #44f4f1 30%, #f65757 100%);
 }
 nav a:hover {
   background: #acddf2 ;
@@ -234,6 +238,9 @@ img {
   border-radius: 10px;
   box-shadow: 0 6px 18px rgba(33, 33, 33, 0.18);
   text-decoration: none;
+  animation: fadeIn 2s ease-in-out;
+  animation: fadeUp 2s ease-in-out;
+
 }
 
 /* ----- Cards container (grille responsive) ----- */
@@ -291,6 +298,7 @@ section:has(.card) {
 .card-content {
   display: block;
   font-weight: 500;
+  animation: fadeIn 2s ease-in-out;
 }
 
 footer {
@@ -316,6 +324,7 @@ footer {
 	transition: max-height var(--transition-medium) ease, opacity var(--transition-fast) ease;
 	margin-top: 0.6rem;
 	max-width: var(--reveal-width);
+  animation: fadeIn 2s ease-in-out
 }
 .reveal-text-teste.show {
 	flex: auto;
