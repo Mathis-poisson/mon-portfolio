@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <main style="max-width:900px;margin:1rem auto;padding:1rem;font-family:system-ui,Segoe UI,Arial;">
+         <nav role="navigation" aria-label="Accueil">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="projet.html">projet</a></li>
+                <li><a href="à propos.html">à propos</a></li>
+                <li><a href="teste.html">teste</a></li>
+            </ul>
+        </nav>
+        <h1>Exemples : lien sur une image</h1>
+
+        <section>
+            <h2>1) Lien simple autour d'une image</h2>
+            <!-- Lien qui renvoie vers une page interne -->
+            <a href="index.html">
+                <img src="image/carricature.jpg" alt="Retour à l'accueil" style="max-width:220px;border:3px solid #333;border-radius:8px;">
+            </a>
+            <p>Utilisez toujours l'attribut <code>alt</code> pour décrire l'image.</p>
+        </section>
+
+        <section>
+            <h2>2) Ouvrir le lien dans un nouvel onglet</h2>
+            <!-- Ouvrir dans un nouvel onglet : target + rel -->
+            <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+                <img src="image/carricature.jpg" alt="Visiter un site externe" style="max-width:180px;border:3px solid #777;border-radius:8px;">
+            </a>
+            <p>Ne pas oublier <code>rel="noopener noreferrer"</code> pour la sécurité.</p>
+        </section>
+
+        <section>
+            <h2>3) Image de fond cliquable (hero)</h2>
+            <!-- Lien utilisé comme bloc avec image de fond -->
+            <a href="projet.html" class="hero-link" aria-label="Voir mes projets"></a>
+        </section>
+
+        <section>
+            <h2>4) Carte cliquable (image + contenu)</h2>
+            <!-- Lien englobant image et texte -->
+            <a href="projet.html" class="card">
+                <img src="image/carricature.jpg" alt="Miniature du projet" style="width:120px;height:auto;border-radius:6px;margin-right:0.6rem;vertical-align:middle;">
+                <span class="card-content">Voir le projet — clickez pour ouvrir</span>
+            </a>
+        </section>
+
+        <hr>
+        <p>Astuce : préférez la balise <code>&lt;a&gt;</code> pour rester accessible et compatible clavier.</p>
+        
+        <!-- Exemple ajouté : cliquer sur plusieurs images révèle des textes (accessible) -->
+        <section id="exemple-click-image-teste" style="margin-top:1rem;">
+            <h2>5) Cliquer sur une image pour afficher un texte (exemples multiples)</h2>
+
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start">
+                <!-- Exemple A -->
+                <div>
+                    <button class="img-toggle-teste" aria-expanded="false" aria-controls="desc-teste-1" style="border:0;background:none;padding:0;cursor:pointer;">
+                        <img src="image/carricature.jpg" alt="Cliquez pour en savoir plus sur la personne A" style="max-width:220px;border-radius:8px;display:block;">
+                    </button>
+                    <div id="desc-teste-1" class="reveal-text-teste" hidden aria-hidden="true">
+                        <p><strong>Personne A :</strong> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa, ipsam. Animi non ad porro, illum aut ratione hic aperiam, nostrum officia odio delectus et iste expedita reprehenderit accusamus. Nulla, ullam..</p>
+                    </div>
+                    
+                </div>
+
+                <!-- Exemple B -->
+                <div>
+                    <button class="img-toggle-teste" aria-expanded="false" aria-controls="desc-teste-2" style="border:0;background:none;padding:0;cursor:pointer;">
+                        <img src="image/arplan.jpg" alt="Cliquez pour en savoir plus sur le projet B" style="max-width:220px;border-radius:8px;display:block;">
+                    </button>
+                    <div id="desc-teste-2" class="reveal-text-teste" hidden aria-hidden="true">
+                        <p><strong>Projet B :</strong> Petite description du projet B, liens et détails.</p>
+                    </div>
+                </div>
+
+                <!-- Exemple C -->
+                <div>
+                    <button class="img-toggle-teste" aria-expanded="false" aria-controls="desc-teste-3" style="border:0;background:none;padding:0;cursor:pointer;">
+                        <img src="image/carricature.jpg" alt="Cliquez pour en savoir plus sur la personne C" style="max-width:220px;border-radius:8px;display:block;">
+                    </button>
+                    <div id="desc-teste-3" class="reveal-text-teste" hidden aria-hidden="true">
+                        <p><strong>Personne C :</strong> Autre description pour l'exemple C.</p>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                /* état initial caché (utiliser la classe pour changer) */
+                .reveal-text-teste {
+                    overflow: hidden;
+                    max-height: 0;
+                    opacity: 100%;
+                    transition: max-height 300ms ease, opacity 220ms ease;
+                    margin-top: 0.6rem;
+                    max-width: 220px;
+                }
+                .reveal-text-teste.show { max-height: 400px; opacity: 1; }
+                .img-toggle-teste { display:block; }
+                .img-toggle-teste:focus { outline: 3px solid rgba(0,123,255,0.25); outline-offset: 4px; }
+            </style>
+
+            <script>
+                (function(){
+                    var buttons = Array.from(document.querySelectorAll('#exemple-click-image-teste .img-toggle-teste'));
+                    buttons.forEach(function(btn){
+                        var targetId = btn.getAttribute('aria-controls');
+                        var target = document.getElementById(targetId);
+                        btn.addEventListener('click', function(){
+                            var expanded = btn.getAttribute('aria-expanded') === 'true';
+                            if (expanded) {
+                                btn.setAttribute('aria-expanded','false');
+                                target.setAttribute('hidden','');
+                                target.setAttribute('aria-hidden','true');
+                                target.classList.remove('show');
+                            } else {
+                                btn.setAttribute('aria-expanded','true');
+                                target.removeAttribute('hidden');
+                                target.setAttribute('aria-hidden','false');
+                                requestAnimationFrame(function(){ target.classList.add('show'); });
+                            }
+                        });
+                    });
+
+                    // close with Escape if any is open
+                    document.addEventListener('keydown', function(e){
+                        if (e.key === 'Escape' || e.key === 'Esc'){
+                            buttons.forEach(function(btn){
+                                if (btn.getAttribute('aria-expanded') === 'true') btn.click();
+                            });
+                        }
+                    });
+                })();
+            </script>
+        </section>
+    </main>
+
+    <style>
+        /* Styles locaux pour les exemples */
+        .hero-link {
+            display:block;
+            height:220px;
+            margin:0.6rem 0 1.2rem 0;
+            background-image: url('image/arplan.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius:8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            text-decoration: none;
+        }
+
+        .card {
+            display:inline-flex;
+            align-items:center;
+            gap:0.6rem;
+            padding:0.6rem 0.8rem;
+            border-radius:8px;
+            border:1px solid #ddd;
+            text-decoration:none;
+            color:inherit;
+            background:#fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        .card:hover { transform: translateY(-4px); transition: transform 180ms ease; }
+    </style>
+    <div class="overlay"></div>
+<section id="footer"> 
+    <!-- Footer (optionnel) -->
+    <footer class="site-footer">
+        <p>&copy; 2025 Mon Portfolio. Tous droits réservés.</p>
+</footer>
+</section>
+</body>
+</html>
