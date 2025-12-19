@@ -8,8 +8,9 @@
 	--transition-fast: 200ms;
 	--transition-medium: 300ms;
 	--reveal-max-height: 400px;
-	--reveal-width: 220px;
+	--reveal-width: 280px;
 	--focus-ring: rgba(0,123,255,0.25);
+	--card-min-width: 280px;
 }
 
 /* Respecter préférence utilisateur pour réduire les animations */
@@ -27,6 +28,7 @@
 	max-width: var(--reveal-width);
 }
 .reveal-text-teste.show {
+	flex: auto;
 	max-height: var(--reveal-max-height);
 	opacity: 1;
 }
@@ -36,6 +38,7 @@
 
 /* ----- details / reveal native element helpers ----- */
 .reveal .content {
+	flex: auto;
 	opacity: 0;
 	max-height: 0;
 	overflow: hidden;
@@ -49,19 +52,23 @@
 
 /* ----- Projets grid layout ----- */
 .projets {
+	flex: auto;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
 	gap: 2rem;
 	margin: 2rem 0;
 }
 
 .project-card {
+	flex: auto;
 	border: 1px solid #a4e987;
 	border-radius: 12px;
 	padding: 1rem;
 	background: #fafafa;
 	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 	transition: box-shadow 250ms ease, transform 200ms ease;
+	display: flex;
+	flex-direction: column;
 }
 
 .project-card:hover {
@@ -76,6 +83,7 @@
 
 .project-card summary img {
 	width: 100%;
+	max-width: 280px;
 	height: auto;
 	border-radius: 8px;
 	display: block;
@@ -83,7 +91,30 @@
 }
 
 .project-card summary:hover img {
+	flex: auto;
 	transform: scale(1.05);
+}
+
+.project-card .content {
+	padding-top: 1rem;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.project-card h2 {
+	margin-top: 0.5rem;
+	font-size: 1rem;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.project-card p {
+	font-size: 0.9rem;
+	line-height: 1.4;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	margin: 0.5rem 0 0 0;
 }
 
 /* ----- Utilities / helpers ----- */
